@@ -1,4 +1,4 @@
-import {exportVariable, info, setFailed, setOutput} from '@actions/core'
+import {exportVariable, info, error, setFailed, setOutput} from '@actions/core'
 import {ActionInterface, NodeActionInterface, Status} from './constants'
 import {deploy, init} from './git'
 import {configureSSH} from './ssh'
@@ -89,9 +89,13 @@ export default async function run(
 
     await init(settings)
     status = await deploy(settings)
-  } catch (error) {
+  } catch (e) {
     status = Status.FAILED
-    setFailed(extractErrorMessage(error))
+
+    const extractedErrorMessage = extractErrorMessage(e)
+
+    error(extractedErrorMessage)
+    setFailed(extractedErrorMessage)
   } finally {
     info(
       `${

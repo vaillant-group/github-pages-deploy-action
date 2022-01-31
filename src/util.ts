@@ -1,4 +1,4 @@
-import {isDebug, info} from '@actions/core'
+import {isDebug, warning} from '@actions/core'
 import {existsSync} from 'fs'
 import path from 'path'
 import {
@@ -77,7 +77,7 @@ export const checkParameters = (action: ActionInterface): void => {
       process.env.RUNNER_OS as OperatingSystems
     )
   ) {
-    info(
+    warning(
       `The operating system you're using is not supported and results may be varied. Please refer to the documentation for more details. ❗`
     )
   }
