@@ -131,7 +131,7 @@ export async function deploy(action: ActionInterface): Promise<Status> {
 
     /* Relaxes permissions of folder due to be deployed so rsync can write to/from it. */
     await execute(
-      `chmod -R 777 ${action.folderPath}`,
+      `chown -R $USER ${action.folderPath}`,
       action.workspace,
       action.silent
     )
@@ -252,7 +252,7 @@ export async function deploy(action: ActionInterface): Promise<Status> {
     )
 
     await execute(
-      `chmod -R 777 ${temporaryDeploymentDirectory}`,
+      `chown -R $USER ${temporaryDeploymentDirectory}`,
       action.workspace,
       action.silent
     )
