@@ -131,7 +131,7 @@ export async function deploy(action: ActionInterface): Promise<Status> {
 
     /* Relaxes permissions of folder due to be deployed so rsync can write to/from it. */
     await execute(
-      `chmod +x git ${action.folderPath}`,
+      `chmod +x ${action.folderPath}`,
       action.workspace,
       action.silent
     )
@@ -252,7 +252,7 @@ export async function deploy(action: ActionInterface): Promise<Status> {
     )
 
     await execute(
-      `chmod +x git ${temporaryDeploymentDirectory}`,
+      `chmod +x ${temporaryDeploymentDirectory}`,
       action.workspace,
       action.silent
     )
